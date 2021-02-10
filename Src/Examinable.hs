@@ -2,7 +2,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Examinable (
+module Src.Examinable (
   TypeInfo(..),
   Type(..),
   Examinable(..),
@@ -14,7 +14,7 @@ module Examinable (
   tnames
 ) where
 
-import Common
+import Src.Common
 
 data TypeInfo = TypeInfo String [TypeInfo]
   deriving Show

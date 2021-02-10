@@ -2,14 +2,14 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE MonoLocalBinds #-}
 
-module Inspectable (
+module Src.Inspectable (
   Inspectable(..)
 ) where
 
 import Data.List
 
-import Common
-import Examinable
+import Src.Common
+import Src.Examinable
 
 class (Examinable a) => Inspectable a where
   inspect :: a -> String

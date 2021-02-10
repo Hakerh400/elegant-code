@@ -1,4 +1,4 @@
-module Common where
+module Src.Common where
 
 import Data.List
 

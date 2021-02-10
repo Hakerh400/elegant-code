@@ -2,7 +2,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE MonoLocalBinds #-}
 
-module Log (
+module Src.Log (
   log,
   -- logInc,
   -- logDec,
@@ -14,8 +14,8 @@ import Data.IORef
 import System.IO
 import Prelude hiding (log)
 
-import Common
-import Inspectable
+import Src.Common
+import Src.Inspectable
 
 class (Inspectable a) => Log a where
   toStr :: a -> String
