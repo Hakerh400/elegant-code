@@ -23,24 +23,25 @@ import Common
 --   True -> "All tests passed!"
 --   False -> "Wrong"
 
-u = undefined
-loop = loop
-
 main :: IO ()
 main = do
-  let procName = "node"
-  let procArgs = ["-p", "require('fs').writeFileSync('c:/users/thomas/downloads/test.txt','ok');for(let i=0;i!==5;i++)fs.writeSync(1,String(i));console.log(setTimeout(()=>process.exit1()))"]
+  let procName = "echo"
+  let procArgs = ["abc"]
 
-  (exitCode, stdout, stderr) <- spawn
+  result <- spawn
     Nothing procName procArgs Nothing
 
-  log("Exit code: " ++ (show exitCode))
-  log()
-  log("Stdout: " ++ stdout)
-  log("Stderr: " ++ stderr)
+  imte result (\(exitCode, stdout, stderr) -> do
+      log("Exit code:", show exitCode)
+      log()
+      log("Stdout:", stdout)
+      log("Stderr:", stderr)
+    ) (do
+      log("Failed")
+    )
 
 spawn :: Maybe String -> String -> [String] -> Maybe String ->
-  IO (Integer, String, String)
+  IO (Maybe (Integer, String, String))
 spawn cwdm procName procArgs inputm = do
   (stdinR, stdinW) <- Proc.createPipe
   (stdoutR, stdoutW) <- Proc.createPipe
@@ -67,9 +68,11 @@ spawn cwdm procName procArgs inputm = do
   ifd inputm (hPutStr stdinW)
   -- hClose stdinW
 
-  (_, _, _, proc) <- Proc.createProcess procInfo
-
-  waitForProcess proc stdoutR stderrR "" ""
+  catch (do
+      (_, _, _, proc) <- Proc.createProcess procInfo
+      result <- waitForProcess proc stdoutR stderrR "" ""
+      return $ Just result
+    ) (const $ pure Nothing :: IOError -> IO (Maybe (Integer, String, String)))
 
 waitForProcess :: Proc.ProcessHandle -> Handle -> Handle -> String -> String ->
   IO (Integer, String, String)

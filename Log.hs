@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE MonoLocalBinds #-}
 
 module Log (
   log,
@@ -14,23 +15,13 @@ import System.IO
 import Prelude hiding (log)
 
 import Common
+import Inspectable
 
-class (Show a) => Log a where
+class (Inspectable a) => Log a where
   toStr :: a -> String
-  toStr = show
 
-instance Log [Char] where
-  toStr = id
-
-instance {-# OVERLAPS #-} (Log a) => Log [a] where
-  toStr a = "[" ++ (intercalate "," $ fmap toStr a) ++ "]"
-
-instance (Show a) => Log (Maybe a) where
-
-instance Log () where
-  toStr = const ""
-
-instance {-# OVERLAPS #-} Log Integer where
+instance (Inspectable a) => Log a where
+  toStr = inspect
 
 -- indent :: IORef Integer
 -- indent = newIORef 0
