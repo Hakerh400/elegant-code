@@ -19,6 +19,5 @@ import qualified Src.CP as CP
 
 main :: IO ()
 main = do
-  FS.exists "abc" >>= log
-  FS.mkdir "abc"
-  FS.exists "abc" >>= log
+  FS.readdir "." >>= \list -> do
+    log(sjoin "\n" list)
