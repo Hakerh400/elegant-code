@@ -52,6 +52,10 @@ instance (Examinable a) => Examinable [a] where
     ]
   examineVals a = fmap examine a
 
+instance Examinable Bool where
+  examineType a = TypeInfo "Bool" []
+  examineVals a = [Type (TypeInfo (ite a "true" "false") []) []]
+
 instance Examinable Char where
   examineType a = TypeInfo "Char" []
   examineVals a = [Type (TypeInfo [a] []) []]

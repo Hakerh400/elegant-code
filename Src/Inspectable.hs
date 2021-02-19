@@ -23,6 +23,8 @@ inspect' (Type typeInfo valsInfo) = (case typeInfo of
     TypeInfo "(,)" _ -> sjoin " " vals
     TypeInfo "[]" [TypeInfo "Char" _] -> ttoStr valsInfo
     TypeInfo "[]" _ -> slist vals
+    TypeInfo "Bool" _ -> tname (head valsInfo)
+    TypeInfo "Char" _ -> "'" ++ tname (head valsInfo) ++ "'"
     TypeInfo "Integer" _ -> tname (head valsInfo)
     a -> "\nInspectable ---> " ++ show a ++ "\n"
   ) where

@@ -14,20 +14,11 @@ import Prelude hiding (log)
 
 import Src.Log
 import Src.Common
+import qualified Src.FS as FS
 import qualified Src.CP as CP
 
 main :: IO ()
 main = do
-  let procName = "node"
-  let procArgs = ["-p", "process.stdin.pipe(process.stdout);setTimeout(()=>process.exit(),1e3)"]
-
-  result <- CP.execSync Nothing procName procArgs Nothing
-
-  imte result (\(exitCode, stdout, stderr) -> do
-      log("Exit code:", show exitCode)
-      log()
-      log("Stdout:", stdout)
-      log("Stderr:", stderr)
-    ) (do
-      log("Failed")
-    )
+  FS.exists "abc" >>= log
+  FS.mkdir "abc"
+  FS.exists "abc" >>= log
