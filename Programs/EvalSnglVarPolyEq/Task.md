@@ -1,0 +1,1 @@
+Given a list of `n` number and `x`, compute `a + bx^1+cx^2+...+zx^n-1` where `a` is the first value in the list, `b` is the second, etc.

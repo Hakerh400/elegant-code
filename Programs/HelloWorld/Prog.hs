@@ -7,5 +7,5 @@ module Programs.HelloWorld.Prog (
 
 import Programs.HelloWorld.Test
 
-func :: () -> String
+func :: Input -> Output
 func () = "Hello, World!"

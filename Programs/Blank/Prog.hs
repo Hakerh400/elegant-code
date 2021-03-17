@@ -7,5 +7,5 @@ module Programs.Blank.Prog (
 
 import Programs.Blank.Test
 
-func :: () -> ()
+func :: Input -> Output
 func () = ()

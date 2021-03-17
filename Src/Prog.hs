@@ -4,7 +4,7 @@ module Src.Prog (
 
 import Prelude hiding (log)
 
-import Programs.Blank.Prog
+import Programs.EvalSnglVarPolyEq.Prog
 import Src.Common
 import Src.Log
 
