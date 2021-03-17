@@ -1,7 +1,7 @@
-module Challenges.HelloWorld (
+module Programs.HelloWorld.Test (
+  tests,
   Input,
-  Output,
-  tests
+  Output
 ) where
 
 type Input = ()
