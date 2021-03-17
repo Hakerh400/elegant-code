@@ -4,8 +4,7 @@
 
 module Src.Log (
   log,
-  -- logInc,
-  -- logDec,
+  logRaw,
   logb
 ) where
 
@@ -23,8 +22,10 @@ class (Inspectable a) => Log a where
 instance (Inspectable a) => Log a where
   toStr = inspect
 
--- indent :: IORef Integer
--- indent = newIORef 0
+logRaw :: String -> IO ()
+logRaw str = do
+  putStr str
+  hFlush stdout
 
 log :: (Log a) => a -> IO ()
 log arg = do
@@ -34,23 +35,10 @@ log arg = do
   let str = toStr arg
   let tab = "" --replicate (fromIntegral b * 2) ' '
 
-  putStrLn $ tab ++ replace '\n' ("\n" ++ tab) str
-  hFlush stdout
+  logRaw(tab ++ replace '\n' ("\n" ++ tab) str ++ "\n")
 
 abc :: String -> Char -> String
 abc tab c = tab ++ [c]
-
--- logInc :: IO ()
--- logInc = do
---   a <- indent
---   b <- readIORef a
---   writeIORef a (b + 1)
-
--- logDec :: IO ()
--- logDec = do
---   a <- indent
---   b <- readIORef a
---   writeIORef a (b - 1)
 
 logb :: IO ()
 logb = do

@@ -1,1 +1,0 @@
-Output string `Hello, World!`.

@@ -13,13 +13,13 @@ module Src.FS (
 import Prelude hiding (readFile, writeFile)
 import qualified System.IO as IO
 
-import qualified System.Directory as Directory
+import qualified System.Directory as Dir
 
 exists :: String -> IO Bool
-exists = Directory.doesPathExist
+exists = Dir.doesPathExist
 
 rename :: String -> String -> IO ()
-rename = Directory.renamePath
+rename = Dir.renamePath
 
 readFile :: String -> IO String
 readFile = IO.readFile
@@ -31,13 +31,13 @@ touch :: String -> IO ()
 touch pth = writeFile pth []
 
 readdir :: String -> IO [String]
-readdir = Directory.listDirectory
+readdir = Dir.listDirectory
 
 mkdir :: String -> IO ()
-mkdir = Directory.createDirectory
+mkdir = Dir.createDirectory
 
 rmdir :: String -> IO ()
-rmdir = Directory.removeDirectory
+rmdir = Dir.removeDirectory
 
 unlink :: String -> IO ()
-unlink = Directory.removeFile
+unlink = Dir.removeFile
