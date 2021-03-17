@@ -5,37 +5,88 @@ module Programs.GreatNumPyramid.Prog (
   Output,
 ) where
 
-import Data.List
 import Data.Char
+import Data.List
 
 import Programs.GreatNumPyramid.Test
 
 func :: Input -> Output
-func () = intercalate "\n" $ indent $ triangle [] '9' '0'
+func () = createPyramidText 9
 
-triangle :: [String] -> Char -> Char -> [String]
-triangle strs start end = if start < end
-  then strs
-  else triangle' strs start end where
-    triangle' :: [String] -> Char -> Char -> [String]
-    triangle' [] start end = triangle [[start]] prev end
-    triangle' strs start end = triangle (
-        [[start]] ++
-        [[start, ' ', start]] ++
-        (map updateLine strs) ++
-        [intersperse ' ' $ replicate (length strs + 3) start]
-      ) prev end
-    updateLine :: String -> String
-    updateLine line = [start, ' '] ++ line ++ [' ', start];
-    prev :: Char
-    prev = prevChar start
+createPyramidText :: Integer -> String
+createPyramidText size = lines2text (createPyramidLines size)
 
-indent :: [String] -> [String]
-indent strs = snd $ indent' strs where
-  indent' :: [String] -> (String, [String])
-  indent' strs = foldr foldFunc ([], []) strs
-  foldFunc :: String -> (String, [String]) -> (String, [String])
-  foldFunc str (ind, acc) = (' ' : ind, (ind ++ str) : acc)
+createPyramidLines :: Integer -> [String]
+createPyramidLines size = finalizePyramid (iteratePyramids size)
 
-prevChar :: Char -> Char
-prevChar a = chr (ord a - 1)
+finalizePyramid :: [String] -> [String]
+finalizePyramid pyramid =
+  addIndent $
+  addSpaces pyramid
+
+addIndent :: [String] -> [String]
+addIndent pyramid = addIndentToLines (initIndent pyramid) pyramid
+
+initIndent :: [String] -> String
+initIndent pyramid = rept (len pyramid - 1) ' '
+
+addIndentToLines :: String -> [String] -> [String]
+addIndentToLines [] pyramid = pyramid
+addIndentToLines indent@(x:xs) (line:rest) =
+  addIndentToSingleLine indent line :
+  addIndentToLines xs rest
+
+addIndentToSingleLine :: String -> String -> String
+addIndentToSingleLine indent line = indent ++ line
+
+addSpaces :: [String] -> [String]
+addSpaces pyramid = map (intersperse ' ') pyramid
+
+iteratePyramids :: Integer -> [String]
+iteratePyramids size = nextPyramid (size - 1) (initialPyramid size)
+
+initialPyramid :: Integer -> [String]
+initialPyramid size = [show size]
+
+nextPyramid :: Integer -> [String] -> [String]
+nextPyramid (-1) pyramid = pyramid
+nextPyramid size pyramid = nextPyramid (size - 1) (updatePyramidWithSize size pyramid)
+
+updatePyramidWithSize :: Integer -> [String] -> [String]
+updatePyramidWithSize size pyramid = updatePyramidWithChar (size2char size) pyramid
+
+updatePyramidWithChar :: Char -> [String] -> [String]
+updatePyramidWithChar c pyramid =
+  prependChar c $
+  prependTwoChars c $
+  appendCharRow c $
+  updateLinesWithChar c pyramid
+
+prependChar :: Char -> [String] -> [String]
+prependChar c pyramid = [c] : pyramid
+
+prependTwoChars :: Char -> [String] -> [String]
+prependTwoChars c pyramid = [c, c] : pyramid
+
+appendCharRow :: Char -> [String] -> [String]
+appendCharRow c pyramid = pyramid ++ [rept (len pyramid + 3) c]
+
+updateLinesWithChar :: Char -> [String] -> [String]
+updateLinesWithChar c pyramid = map (updateSingleLineWithChar c) pyramid
+
+updateSingleLineWithChar :: Char -> String -> String
+updateSingleLineWithChar c line = (c : line) ++ [c]
+
+lines2text :: [String] -> String
+lines2text strs = intercalate "\n" strs
+
+size2char :: Integer -> Char
+size2char size = head (show size)
+
+len :: [a] -> Integer
+len [] = 0
+len (_:xs) = 1 + len xs
+
+rept :: Integer -> a -> [a]
+rept 0 _ = []
+rept n a = a : rept (n - 1) a

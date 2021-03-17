@@ -5,6 +5,9 @@ module Programs.Blank.Prog (
   Output,
 ) where
 
+import Data.Char
+import Data.List
+
 import Programs.Blank.Test
 
 func :: Input -> Output
