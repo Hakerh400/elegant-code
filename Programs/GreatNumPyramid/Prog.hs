@@ -8,6 +8,7 @@ module Programs.GreatNumPyramid.Prog (
 import Data.Char
 import Data.List
 
+import Common.Main
 import Programs.GreatNumPyramid.Test
 
 func :: Input -> Output
@@ -77,16 +78,5 @@ updateLinesWithChar c pyramid = map (updateSingleLineWithChar c) pyramid
 updateSingleLineWithChar :: Char -> String -> String
 updateSingleLineWithChar c line = (c : line) ++ [c]
 
-lines2text :: [String] -> String
-lines2text strs = intercalate "\n" strs
-
 size2char :: Integer -> Char
 size2char size = head (show size)
-
-len :: [a] -> Integer
-len [] = 0
-len (_:xs) = 1 + len xs
-
-rept :: Integer -> a -> [a]
-rept 0 _ = []
-rept n a = a : rept (n - 1) a

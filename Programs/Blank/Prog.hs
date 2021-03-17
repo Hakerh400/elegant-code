@@ -8,6 +8,7 @@ module Programs.Blank.Prog (
 import Data.Char
 import Data.List
 
+import Common.Main
 import Programs.Blank.Test
 
 func :: Input -> Output

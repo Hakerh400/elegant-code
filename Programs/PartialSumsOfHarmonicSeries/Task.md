@@ -1,0 +1,1 @@
+Given an positive integer `n`, return the least positive integer `k` such that the `k`-th partial sum of the [harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)) is greater than or equal to `n`.
