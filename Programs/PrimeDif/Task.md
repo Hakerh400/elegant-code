@@ -1,0 +1,1 @@
+Given an integer `n`, output the smallest prime such that the difference between it and the next prime is at least `n`.

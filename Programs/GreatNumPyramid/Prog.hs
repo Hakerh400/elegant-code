@@ -32,9 +32,9 @@ initIndent pyramid = rept (len pyramid - 1) ' '
 
 addIndentToLines :: String -> [String] -> [String]
 addIndentToLines [] pyramid = pyramid
-addIndentToLines indent@(x:xs) (line:rest) =
+addIndentToLines indent (line:rest) =
   addIndentToSingleLine indent line :
-  addIndentToLines xs rest
+  addIndentToLines (tail indent) rest
 
 addIndentToSingleLine :: String -> String -> String
 addIndentToSingleLine indent line = indent ++ line
