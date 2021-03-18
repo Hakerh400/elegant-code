@@ -1,0 +1,1 @@
+Given the preorder and the inorder of a tree, output the postorder.

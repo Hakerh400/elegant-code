@@ -1,0 +1,1 @@
+Given a non-ragged array (an array where all sub-arrays at a particular level have the same length) of non-negative integers, answer its shape, that is, the length along every dimension. You may assume that the given array has at least one empty dimension, and that only the trailing dimension can have length 0.

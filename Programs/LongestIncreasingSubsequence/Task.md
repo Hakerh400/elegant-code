@@ -1,0 +1,1 @@
+Given an array of numbers, output the length of the longest increasing (not necessarily contiguous) subsequence. It is guaranteed that there are no duplicates in the array. For example, if the input was [1, 5, 2, 4], the answer would be 3 for the subsequence [1, 2, 4].
