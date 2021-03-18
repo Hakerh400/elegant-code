@@ -37,7 +37,7 @@ splitAtElemHelper a before (x:xs) = if a == x
   else splitAtElemHelper a (x : before) xs
 
 filterByRef :: [Integer] -> [Integer] -> [Integer]
-filterByRef ref list = filter (belongsToList ref) list where
+filterByRef ref list = filter (belongsToList ref) list
 
 belongsToList :: [Integer] -> Integer -> Bool
 belongsToList ref a = elem a ref
