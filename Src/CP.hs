@@ -1,4 +1,4 @@
-module CP (
+module Src.CP (
   execSync
 ) where
 
@@ -15,7 +15,7 @@ import qualified System.Process as Proc
 import Control.Exception
 import Prelude hiding (log)
 
-import Common
+import Src.Common
 
 type Stdio = (Handle, Handle, Handle)
 
