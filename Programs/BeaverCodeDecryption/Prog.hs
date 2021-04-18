@@ -31,7 +31,7 @@ flatZip a [] = a
 flatZip (x:xs) (y:ys) = x : y : flatZip xs ys
 
 splitAtHalf :: [a] -> ([a], [a])
-splitAtHalf a = splitAtHalfPair [] a;
+splitAtHalf a = splitAtHalfPair [] a
 
 splitAtHalfPair :: [a] -> [a] -> ([a], [a])
 splitAtHalfPair a b@(x:xs) = if len a >= len b
