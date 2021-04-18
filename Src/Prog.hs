@@ -4,20 +4,21 @@ module Src.Prog (
 
 import Prelude hiding (log)
 
-import Programs.ReverseString.Prog
+import Programs.BeaverCodeDecryption.Prog
 import Src.Common
 import Src.Log
 
 run :: IO ()
-run = run' tests where
-  run' :: [(Input, Output)] -> IO ()
-  run' [] = nop
-  run' ((inp, out):rest) = do
-    let result = func inp
+run = do
+  run' tests where
+    run' :: [(Input, Output)] -> IO ()
+    run' [] = nop
+    run' ((inp, out):rest) = do
+      let result = func inp
 
-    if result == out then run' rest else do
-      log(inp)
-      logb
-      log(out)
-      logb
-      log(result)
+      if result == out then run' rest else do
+        log(inp)
+        logb
+        log(out)
+        logb
+        log(result)
