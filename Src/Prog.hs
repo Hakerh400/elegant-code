@@ -4,7 +4,7 @@ module Src.Prog (
 
 import Prelude hiding (log)
 
-import Programs.BeaverCodeDecryption.Prog
+import Programs.CumulativeCounts.Prog
 import Src.Common
 import Src.Log
 
